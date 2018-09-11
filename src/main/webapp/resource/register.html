@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册页面</title>
+</head>
+<body>
+	<div>
+		<form action="/mynews/tool/securityServlet?type=register" method="post">
+			<table>
+				<tr>
+					<td></td>
+					<td>注册</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td align="right">用户名：</td>
+					<td><input type="text" id="name" name="name" onblur="burname()"></td>
+					<td><span id="namespan"></span></td>
+				</tr>
+				<tr>
+					<td align="right"><label>密码：</label></td>
+					<td><input type="password" id="passwd" name="passwd" onblur="burpasswd()"></td>
+					<td><span id="passwdspan"></span></td>
+				</tr>
+				<tr>
+					<td align="right"><label>重新输入密码：</label></td>
+					<td><input type="password" id="passwd1" name="passwd1" onblur="burpasswd1()"></td>
+					<td><span id="passwd1span"></span></td>
+				</tr>
+				<tr>
+					<td align="right"><label>选择类型：</label></td>
+					<td>
+						<select name="usertype" id="">
+							<option value="user">普通用户</option>
+							<option value="newsAuthor">新闻发布员</option>
+							<option value="manager">管理员</option>
+						</select>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="确定" ></td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</html>
+<script>
+	function burname(){
+		var pattern = new RegExp("^[a-z]([a-z0-9])*[-_]?([a-z0-9]+)$","i");
+		var str1=document.getElementById("name").value;
+		
+		if(document.getElementById("name").value==null || document.getElementById("name").value==""){
+			document.getElementById("namespan").innerHTML="*内容不能为空";
+			return false;
+		}else{
+			document.getElementById("namespan").innerHTML="";
+			return true;
+		}
+	}
+
+
+	function burpasswd(){
+		if (document.getElementById("passwd").value==null || document.getElementById("passwd").value=="") {
+			document.getElementById("passwdspan").innerHTML="*内容不能为空";
+			return false;
+		}else{
+			document.getElementById("passwdspan").innerHTML="";
+			return true;
+		}
+	}
+	function burpasswd1(){
+		if(document.getElementById("passwd1").value==document.getElementById("passwd").value){
+			document.getElementById("passwd1span").innerHTML="";
+			return true;
+		}else{
+			document.getElementById("passwd1span").innerHTML="密码不正确";
+			return false;
+		}
+	}
+	function submit1(){
+		result1=burname();
+		result1=burpasswd() && result1;	
+		result1=burpasswd1()&& result1;	
+		if( result1)
+			return true;//提交
+		else 
+			return false;//阻止提交
+	}
+</script>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登陆入口</title>
+	<style>
+		.main{
+			width: 500px;
+			height: 650px;
+			margin: 0 auto;
+			padding-left: 270px;
+		}
+		.but{
+			margin-left: 30px;
+			margin-right: 30px;  
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<form action="/mynews/tool/securityServlet?type=login" method="post">
+			<p style="margin-left: 100px;">登录入口</p>
+			<p>
+				<label for="">账号：</label>
+				<input type="text" id="name" name="name" onBlur="valName()">
+				<label id="namespan"></label>
+			</p>
+			<p>
+				<label for="">密码：</label>
+				<input type="password" id="passwd" name="passwd" onblur="valPassword()">
+				<span id="passwdspan"></span>
+			</p>
+			<input type="submit" value="登陆" class="but">
+			<input type="button" value="注册" class="but">
+		</form>
+	</div>
+</body>
+</html>
+
+<script>
+	function valName(){
+		var pattern = new RegExp("^[a-z]([a-z0-9])*[-_]?([a-z0-9]+)$","i");
+		var str1=document.getElementById("name").value;
+		
+		if(document.getElementById("name").value==null || document.getElementById("name").value==""){
+			document.getElementById("namespan").innerHTML="*不能为空";
+			return false;
+		}else{
+			document.getElementById("namespan").innerHTML="";
+			return true;
+		}
+	}
+	
+	function valPassword(){
+		var str = document.getElementById("passwd").value;
+		if(document.getElementById("passwd").value==null || document.getElementById("passwd").value==""){
+			document.getElementById("passwdspan").innerHTML="*不能为空";
+			return false;
+		}else{
+			document.getElementById("passwdspan").innerHTML="";
+			return true;
+		}
+	}
+		
+	function submit1(){
+		result1=valName();
+		result1=valPassword() && result1;		
+		if( result1)
+			return true;//提交
+		else 
+			return false;//阻止提交
+	}
+</script>
